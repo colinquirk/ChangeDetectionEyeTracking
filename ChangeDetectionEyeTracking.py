@@ -35,7 +35,7 @@ class EyeTrackingKtask(changedetection.Ktask):
         super(EyeTrackingKtask, self).__init__(**kwargs)
 
     def run(self):
-        self.chdir(self)
+        self.chdir()
 
         ok = self.get_experiment_info_from_dialog(self.questionaire_dict)
 
@@ -75,4 +75,4 @@ experiment = EyeTrackingKtask(
     monitor_distance=changedetection.distance_to_monitor
 )
 
-print(experiment.data_fields)
+experiment.run()
