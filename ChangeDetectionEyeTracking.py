@@ -4,7 +4,8 @@ from __future__ import print_function
 import sys
 import random
 
-import psychopy
+# Necesssary to access psychopy paths
+import psychopy  # noqa: F401
 
 import eyelinker
 
@@ -78,6 +79,17 @@ class EyeTrackingKtask(changedetection.Ktask):
         self.open_window(screen=0)
         self.display_text_screen('Loading...', wait_for_input=False)
 
+        self.tracker = eyelinker.EyeLinker(
+            self.experiment_window,
+            'CDET' + self.experiment_info['Subject Number'] + '.edf',
+            'BOTH'
+        )
+
+        self.tracker.initialize_graphics()
+        self.tracker.open_edf()
+        self.tracker.initialize_tracker()
+        self.tracker.send_calibration_settings()
+
         for instruction in self.instruct_text:
             self.display_text_screen(text=instruction)
 
@@ -92,8 +104,13 @@ class EyeTrackingKtask(changedetection.Ktask):
 
             for block_num in range(self.number_of_blocks):
                 block = self.make_block()
+                self.tracker.calibrate()
                 for trial_num, trial in enumerate(block):
+                    self.tracker.start_recording()
+                    self.tracker.send_message('BLOCK %d' % block_num)
+                    self.tracker.send_message('TRIAL %d' % trial_num)
                     data = self.run_trial(trial, block_num, trial_num)
+                    self.tracker.stop_recording()
                     data.update({'Condition': condition})
                     self.send_data(data)
 
@@ -101,6 +118,16 @@ class EyeTrackingKtask(changedetection.Ktask):
 
                 if block_num + 1 != self.number_of_blocks:
                     self.display_break()
+
+        self.display_text_screen(
+            'The experiment is now over, please get your experimenter.',
+            bg_color=[0, 0, 255], text_color=[255, 255, 255],
+            wait_for_input=False)
+
+        self.tracker.set_offline_mode()
+        self.tracker.close_edf()
+        self.tracker.transfer_edf()
+        self.tracker.close_connection()
 
         self.display_text_screen(
             'The experiment is now over, please get your experimenter.',
