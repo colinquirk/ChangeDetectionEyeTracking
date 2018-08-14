@@ -148,3 +148,4 @@ if __name__ == '__main__':
         experiment.run()
     except:  # noqa:E722
         experiment.quit_experiment()
+        raise
