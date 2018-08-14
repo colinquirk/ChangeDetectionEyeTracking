@@ -5,7 +5,7 @@ import sys
 import random
 
 # Necesssary to access psychopy paths
-import psychopy  # noqa: F401
+import psychopy  # noqa:F401
 
 import eyelinker
 
@@ -64,6 +64,13 @@ class EyeTrackingKtask(changedetection.Ktask):
         self.tracker = None
 
         super(EyeTrackingKtask, self).__init__(**kwargs)
+
+    def quit_experiment(self):
+        self.tracker.set_offline_mode()
+        self.tracker.close_edf()
+        self.tracker.transfer_edf()
+        self.tracker.close_connection()
+        super(EyeTrackingKtask, self).quit_experiment()
 
     def run(self):
         self.chdir()
@@ -124,15 +131,6 @@ class EyeTrackingKtask(changedetection.Ktask):
             bg_color=[0, 0, 255], text_color=[255, 255, 255],
             wait_for_input=False)
 
-        self.tracker.set_offline_mode()
-        self.tracker.close_edf()
-        self.tracker.transfer_edf()
-        self.tracker.close_connection()
-
-        self.display_text_screen(
-            'The experiment is now over, please get your experimenter.',
-            bg_color=[0, 0, 255], text_color=[255, 255, 255])
-
         self.quit_experiment()
 
 
@@ -145,4 +143,8 @@ experiment = EyeTrackingKtask(
     number_of_trials_per_block=number_of_trials_per_block,
 )
 
-experiment.run()
+if __name__ == '__main__':
+    try:
+        experiment.run()
+    except:  # noqa:E722
+        experiment.quit_experiment()
