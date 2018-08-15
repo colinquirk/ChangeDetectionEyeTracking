@@ -113,9 +113,9 @@ class EyeTrackingKtask(changedetection.Ktask):
                 block = self.make_block()
                 self.tracker.calibrate()
                 for trial_num, trial in enumerate(block):
-                    self.tracker.start_recording()
                     self.tracker.send_message('BLOCK %d' % block_num)
                     self.tracker.send_message('TRIAL %d' % trial_num)
+                    self.tracker.start_recording()
                     data = self.run_trial(trial, block_num, trial_num)
                     self.tracker.stop_recording()
                     data.update({'Condition': condition})
