@@ -71,10 +71,10 @@ class EyeTrackingKtask(changedetection.Ktask):
         self.quit = True
         self.display_text_screen('Quiting...', wait_for_input=False)
         if self.tracker:
-        self.tracker.set_offline_mode()
-        self.tracker.close_edf()
-        self.tracker.transfer_edf()
-        self.tracker.close_connection()
+            self.tracker.set_offline_mode()
+            self.tracker.close_edf()
+            self.tracker.transfer_edf()
+            self.tracker.close_connection()
 
         super(EyeTrackingKtask, self).quit_experiment()
 
@@ -157,5 +157,5 @@ if __name__ == '__main__':
         experiment.run()
     except:  # noqa:E722
         if not experiment.quit:
-        experiment.quit_experiment()
+            experiment.quit_experiment()
         raise
