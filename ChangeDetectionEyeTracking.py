@@ -69,7 +69,8 @@ class EyeTrackingKtask(changedetection.Ktask):
 
     def quit_experiment(self):
         self.quit = True
-        self.display_text_screen('Quiting...', wait_for_input=False)
+        if self.experiment_window:
+            self.display_text_screen('Quiting...', wait_for_input=False)
         if self.tracker:
             self.tracker.set_offline_mode()
             self.tracker.close_edf()
