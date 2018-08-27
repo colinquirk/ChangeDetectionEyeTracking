@@ -3,6 +3,8 @@ from __future__ import print_function
 
 import sys
 import random
+import sys
+import time
 
 # Necesssary to access psychopy paths
 import psychopy  # noqa:F401
@@ -136,6 +138,8 @@ class EyeTrackingKtask(changedetection.Ktask):
             'The experiment is now over, please get your experimenter.',
             bg_color=[0, 0, 255], text_color=[255, 255, 255],
             wait_for_input=False)
+
+        time.sleep(10)
 
         self.quit_experiment()
 
