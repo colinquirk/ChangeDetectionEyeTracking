@@ -61,20 +61,26 @@ number_of_trials_per_block = 10
 
 class EyeTrackingKtask(changedetection.Ktask):
     def __init__(self, **kwargs):
+        self.quit = False  # Needed because eyetracker must shut down
         self.tracker = None
 
         super(EyeTrackingKtask, self).__init__(**kwargs)
 
     def quit_experiment(self):
+        self.quit = True
+        self.display_text_screen('Quiting...', wait_for_input=False)
+        if self.tracker:
         self.tracker.set_offline_mode()
         self.tracker.close_edf()
         self.tracker.transfer_edf()
         self.tracker.close_connection()
+
         super(EyeTrackingKtask, self).quit_experiment()
 
     def run(self):
         self.chdir()
 
+        print('Note: EDF file will be overwritten if identical subject numbers are used!')
         ok = self.get_experiment_info_from_dialog(self.questionaire_dict)
 
         if not ok:
@@ -147,5 +153,6 @@ if __name__ == '__main__':
     try:
         experiment.run()
     except:  # noqa:E722
+        if not experiment.quit:
         experiment.quit_experiment()
         raise
