@@ -138,6 +138,11 @@ class EyeTrackingKtask(changedetection.Ktask):
                 if block_num + 1 != self.number_of_blocks:
                     self.display_break()
 
+                    if condition == 'FreeGaze':
+                        self.display_text_screen(text='Remember:\n\n' + freegaze_instruct_text)
+                    else:
+                        self.display_text_screen(text='Remember:\n\n' + fixated_instruct_text)
+
         self.display_text_screen(
             'The experiment is now over, please get your experimenter.',
             bg_color=[0, 0, 255], text_color=[255, 255, 255],
