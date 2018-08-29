@@ -1,6 +1,7 @@
 from __future__ import division
 from __future__ import print_function
 
+import os
 import random
 import sys
 import time
@@ -55,6 +56,9 @@ freegaze_instruct_text = (
     'For these sets of blocks, you may move your eyes as you please.\n\n'
     'Press space to begin the experiment.'
 )
+
+data_directory = os.path.join(
+    os.path.expanduser('~'), 'Desktop', 'Colin', 'ChangeDetectionEyeTracking', 'Data')
 
 number_of_blocks = 2
 number_of_trials_per_block = 10
