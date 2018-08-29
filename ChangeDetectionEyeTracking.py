@@ -128,6 +128,8 @@ class EyeTrackingKtask(changedetection.Ktask):
             for block_num in range(self.number_of_blocks):
                 block = self.make_block()
                 self.tracker.calibrate()
+                self.display_text_screen(text='Get ready...', wait_for_input=False)
+                time.sleep(2)
                 for trial_num, trial in enumerate(block):
                     self.tracker.send_message('BLOCK %d' % block_num)
                     self.tracker.send_message('TRIAL %d' % trial_num)
