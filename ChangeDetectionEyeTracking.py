@@ -160,6 +160,7 @@ class EyeTrackingKtask(changedetection.Ktask):
 experiment = EyeTrackingKtask(
     experiment_name='EyeTrackingChangeDetection',
     data_fields=data_fields,
+    data_directory=data_directory,
     instruct_text=instruct_text,
     monitor_distance=changedetection.distance_to_monitor,
     sample_time=sample_time,
