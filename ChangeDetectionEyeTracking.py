@@ -47,14 +47,16 @@ instruct_text = [
 ]
 
 fixated_instruct_text = (
-    'For these sets of blocks, please keep your eyes on the fixation cross '
+    'For these blocks, please keep your eyes on the fixation cross '
     'from when it appears until you are able to make your response.\n\n'
-    'Press space to begin the experiment.'
+    'Try to blink only while making your response.\n\n'
+    'Press space to continue.'
 )
 
 freegaze_instruct_text = (
-    'For these sets of blocks, you may move your eyes as you please.\n\n'
-    'Press space to begin the experiment.'
+    'For these blocks, you may move your eyes as you please.\n\n'
+    'Try to blink only while making your response.\n\n'
+    'Press space to continue.'
 )
 
 data_directory = os.path.join(
