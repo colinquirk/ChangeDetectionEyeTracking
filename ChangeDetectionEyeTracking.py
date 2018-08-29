@@ -4,7 +4,6 @@ from __future__ import print_function
 import os
 import random
 import sys
-import time
 
 # Necesssary to access psychopy paths
 import psychopy  # noqa:F401
@@ -129,7 +128,7 @@ class EyeTrackingKtask(changedetection.Ktask):
                 block = self.make_block()
                 self.tracker.calibrate()
                 self.display_text_screen(text='Get ready...', wait_for_input=False)
-                time.sleep(2)
+                psychopy.core.wait(2)
                 for trial_num, trial in enumerate(block):
                     self.tracker.send_message('BLOCK %d' % block_num)
                     self.tracker.send_message('TRIAL %d' % trial_num)
@@ -154,7 +153,7 @@ class EyeTrackingKtask(changedetection.Ktask):
             bg_color=[0, 0, 255], text_color=[255, 255, 255],
             wait_for_input=False)
 
-        time.sleep(10)
+        psychopy.core.wait(10)
 
         self.quit_experiment()
 
