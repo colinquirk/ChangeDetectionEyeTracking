@@ -62,6 +62,8 @@ freegaze_instruct_text = (
 data_directory = os.path.join(
     os.path.expanduser('~'), 'Desktop', 'Colin', 'ChangeDetectionEyeTracking', 'Data')
 
+sample_time = 0.75
+
 number_of_blocks = 2
 number_of_trials_per_block = 10
 
@@ -160,6 +162,7 @@ experiment = EyeTrackingKtask(
     data_fields=data_fields,
     instruct_text=instruct_text,
     monitor_distance=changedetection.distance_to_monitor,
+    sample_time=sample_time,
     number_of_blocks=number_of_blocks,
     number_of_trials_per_block=number_of_trials_per_block,
 )
