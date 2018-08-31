@@ -126,12 +126,15 @@ class EyeTrackingKtask(changedetection.Ktask):
 
             for block_num in range(self.number_of_blocks):
                 block = self.make_block()
+                self.tracker.send_status('Ready to calibrate')
                 self.tracker.calibrate()
                 self.display_text_screen(text='Get ready...', wait_for_input=False)
                 psychopy.core.wait(2)
                 for trial_num, trial in enumerate(block):
                     self.tracker.send_message('BLOCK %d' % block_num)
                     self.tracker.send_message('TRIAL %d' % trial_num)
+                    status = '%s: Block %d, Trial %d' % condition, block_num, trial_num
+                    self.tracker.send_status(status)
                     self.tracker.start_recording()
                     data = self.run_trial(trial, block_num, trial_num)
                     self.tracker.stop_recording()
