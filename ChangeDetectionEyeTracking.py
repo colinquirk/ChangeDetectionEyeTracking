@@ -4,6 +4,7 @@ from __future__ import print_function
 import os
 import random
 import sys
+import traceback
 
 # Necesssary to access psychopy paths
 import psychopy  # noqa:F401
@@ -175,7 +176,7 @@ experiment = EyeTrackingKtask(
 if __name__ == '__main__':
     try:
         experiment.run()
-    except:  # noqa:E722
+    except Exception:
+        print(traceback.format_exc())
         if not experiment.quit:
             experiment.quit_experiment()
-        raise
