@@ -116,6 +116,8 @@ class EyeTrackingKtask(changedetection.Ktask):
         for instruction in self.instruct_text:
             self.display_text_screen(text=instruction)
 
+        self.tracker.display_eyetracking_instructions()
+
         conditions = ['FreeGaze', 'Fixated']
         random.shuffle(conditions)
 
