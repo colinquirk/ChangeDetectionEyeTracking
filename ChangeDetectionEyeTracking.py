@@ -172,6 +172,8 @@ experiment = EyeTrackingKtask(
     sample_time=sample_time,
     number_of_blocks=number_of_blocks,
     number_of_trials_per_block=number_of_trials_per_block,
+    repeat_stim_colors=False,
+    repeat_test_colors=True,
 )
 
 if __name__ == '__main__':
