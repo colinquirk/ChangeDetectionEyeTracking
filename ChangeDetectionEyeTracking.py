@@ -64,8 +64,8 @@ data_directory = os.path.join(
 
 sample_time = 0.75
 
-number_of_blocks = 10
-number_of_trials_per_block = 50
+number_of_blocks = 5
+number_of_trials_per_block = 80
 
 
 class EyeTrackingKtask(changedetection.Ktask):
