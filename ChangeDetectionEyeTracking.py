@@ -1,6 +1,3 @@
-from __future__ import division
-from __future__ import print_function
-
 import os
 import random
 import sys
@@ -111,7 +108,7 @@ class EyeTrackingKtask(changedetection.Ktask):
         self.tracker.initialize_graphics()
         self.tracker.open_edf()
         self.tracker.initialize_tracker()
-        self.tracker.send_calibration_settings()
+        self.tracker.send_tracking_settings()
 
         for instruction in self.instruct_text:
             self.display_text_screen(text=instruction)
